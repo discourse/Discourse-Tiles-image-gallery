@@ -19,15 +19,14 @@
 //------------------------------------------
 // Variables
 //------------------------------------------
-$tiles-min-width-for-three-columns: 750px    !default;
-$tiles-meta-background: rgba(black, .8)      !default;
-$tiles-padding: 3px                          !default;
+$tiles-min-width-for-three-columns: 750px !default;
+$tiles-meta-background: rgba(black, 0.8) !default;
+$tiles-padding: 3px !default;
 
 //------------------------------------------
 // Tiles Grid
 //------------------------------------------
 .tiles-initialized {
-	
 	.lightbox-wrapper,
 	> img {
 		display: block;
@@ -59,10 +58,10 @@ $tiles-padding: 3px                          !default;
 		overflow: hidden;
 		background: $tiles-meta-background;
 	}
-	
+
 	p:empty,
 	br,
-	>img {
+	> img {
 		display: none;
 	}
 }
@@ -82,14 +81,14 @@ div[data-theme-tiles="1"]:not(.tiles-initialized) {
 //------------------------------------------
 // Editor preview
 //------------------------------------------
-#reply-control div[data-theme-tiles="1"]>p {
-    border-left: 4px solid $tertiary;
-    padding-left: 2px;
-    margin-top: 2em;
+#reply-control div[data-theme-tiles="1"] > p {
+	border-left: 4px solid $tertiary;
+	padding-left: 2px;
+	margin-top: 2em;
 
-	>img:not(.thumbnail) {
-    width: auto;
-    max-height: 110px;
-    margin: 2px;
+	> img:not(.thumbnail) {
+		width: auto;
+		max-height: 110px;
+		margin: 2px;
 	}
 }
