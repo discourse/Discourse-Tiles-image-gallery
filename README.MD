@@ -1,3 +1,5 @@
+# Tiles
+
 A theme component that creates grid galleries in Discourse topics
 
 More information: 
