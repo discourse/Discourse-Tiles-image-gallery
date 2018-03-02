@@ -1,0 +1,69 @@
+<script 
+src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js">
+</script>
+<script 
+src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js">
+</script>
+
+<script type="text/discourse-plugin" version="0.8.18">
+//------------------------------------------
+// Fire script on topic pages
+//------------------------------------------
+api.onPageChange(url => {
+	d_tiles = TilesGallery();
+	if (url.match(/^\/t\//)) {
+		TilesGallery();
+	} else {
+	    $(document).unbind("ajaxSuccess", d_tiles);
+	}
+});
+
+//------------------------------------------
+// Initialize Tiles Gallery
+//------------------------------------------
+function TilesGallery() {
+	$(document).ajaxSuccess(function() {
+		var $d_tg = $('#topic div[data-theme-tiles="1"]').not(".tiles-initialized");
+		$d_tg
+			.imagesLoaded(function() {
+				$d_tg
+					.masonry({
+						itemSelector: ".lightbox-wrapper",
+						transitionDuration: 0
+					})
+			})
+            .one( 'layoutComplete', function() {
+                $d_tg.addClass("tiles-initialized");
+            });
+	});
+}
+
+//------------------------------------------
+// Add Tiles button to the composer toolbar
+//------------------------------------------
+api.onToolbarCreate(function(toolbar) {
+	toolbar.addButton({
+		trimLeading: true,
+		id: "TilesGallery",
+		group: "insertions",
+		icon: "th",
+		title: "tiles_gallery_button",
+		perform: function(e) {
+			return e.applySurround(
+				'<div data-theme-tiles="1">\n\n',
+				"\n\n</div>",
+				"tiles_add_images_prompt"
+			);
+		}
+	});
+});
+
+//------------------------------------------
+// Tiles I18n Translations
+//------------------------------------------
+I18n.translations.en.js.composer.tiles_add_images_prompt =
+"Add images";
+I18n.translations.en.js.tiles_gallery_button =
+"Grid Gallery";
+
+</script>
