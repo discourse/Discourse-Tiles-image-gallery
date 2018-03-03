@@ -14,10 +14,9 @@ api.onPageChange(url => {
 	if (url.match(/^\/t\//)) {
 		TilesGallery();
 	} else {
-	    $(document).unbind("ajaxSuccess", d_tiles);
+		$(document).unbind("ajaxSuccess", d_tiles);
 	}
 });
-
 //------------------------------------------
 // Initialize Tiles Gallery
 //------------------------------------------
@@ -26,18 +25,16 @@ function TilesGallery() {
 		var $d_tg = $('#topic div[data-theme-tiles="1"]').not(".tiles-initialized");
 		$d_tg
 			.imagesLoaded(function() {
-				$d_tg
-					.masonry({
-						itemSelector: ".lightbox-wrapper",
-						transitionDuration: 0
-					})
+				$d_tg.masonry({
+					itemSelector: ".lightbox-wrapper",
+					transitionDuration: 0
+				});
 			})
-            .one( 'layoutComplete', function() {
-                $d_tg.addClass("tiles-initialized");
-            });
+			.one("layoutComplete", function() {
+				$d_tg.addClass("tiles-initialized");
+			});
 	});
 }
-
 //------------------------------------------
 // Add Tiles button to the composer toolbar
 //------------------------------------------
@@ -57,13 +54,9 @@ api.onToolbarCreate(function(toolbar) {
 		}
 	});
 });
-
 //------------------------------------------
 // Tiles I18n Translations
 //------------------------------------------
-I18n.translations.en.js.composer.tiles_add_images_prompt =
-"Add images";
-I18n.translations.en.js.tiles_gallery_button =
-"Grid Gallery";
-
+I18n.translations.en.js.composer.tiles_add_images_prompt = "Add images";
+I18n.translations.en.js.tiles_gallery_button = "Grid Gallery";
 </script>
