@@ -7,34 +7,25 @@ src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js">
 
 <script type="text/discourse-plugin" version="0.8.18">
 //------------------------------------------
-// Fire script on topic pages
+// initialize Tiles
 //------------------------------------------
-api.onPageChange(url => {
-	d_tiles = TilesGallery();
-	if (url.match(/^\/t\//)) {
-		TilesGallery();
-	} else {
-		$(document).unbind("ajaxSuccess", d_tiles);
-	}
-});
-//------------------------------------------
-// Initialize Tiles Gallery
-//------------------------------------------
-function TilesGallery() {
-	$(document).ajaxSuccess(function() {
-		var $d_tg = $('#topic div[data-theme-tiles="1"]').not(".tiles-initialized");
-		$d_tg
-			.imagesLoaded(function() {
-				$d_tg.masonry({
-					itemSelector: ".lightbox-wrapper",
-					transitionDuration: 0
-				});
-			})
-			.one("layoutComplete", function() {
-				$d_tg.addClass("tiles-initialized");
+var tiles_selector = 'div[data-theme-tiles="1"]';
+
+api.decorateCooked($elem =>
+	$elem
+		.children(tiles_selector)
+		.not(".tiles-initialized")
+		.imagesLoaded(function() {
+			$(tiles_selector).masonry({
+				itemSelector: ".lightbox-wrapper",
+				transitionDuration: 0
 			});
-	});
-}
+		})
+		.one("layoutComplete", function() {
+			$(tiles_selector).addClass("tiles-initialized")
+		}),
+		$(tiles_selector).masonry('layout')
+);
 //------------------------------------------
 // Add Tiles button to the composer toolbar
 //------------------------------------------
