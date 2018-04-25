@@ -7,6 +7,14 @@ src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js">
 
 <script type="text/discourse-plugin" version="0.8.18">
 //------------------------------------------
+// Tiles I18n Translations
+//------------------------------------------
+I18n.translations.en.js.composer.tiles_add_images_prompt = 
+"Add images";
+I18n.translations.en.js.tiles_gallery_button = 
+"Grid Gallery";
+
+//------------------------------------------
 // initialize Tiles
 //------------------------------------------
 var tiles_selector = 'div[data-theme-tiles="1"]';
@@ -45,11 +53,4 @@ api.onToolbarCreate(function(toolbar) {
 		}
 	});
 });
-//------------------------------------------
-// Tiles I18n Translations
-//------------------------------------------
-I18n.translations.en.js.composer.tiles_add_images_prompt = 
-"Add images";
-I18n.translations.en.js.tiles_gallery_button = 
-"Grid Gallery";
 </script>
