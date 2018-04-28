@@ -9,52 +9,47 @@ src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js">
 //------------------------------------------
 // Tiles I18n Translations
 //------------------------------------------
-
 $(document).ready(function() {
-I18n.translations.en.js.composer.tiles_add_images_prompt = 
-"Add images";
-I18n.translations.en.js.tiles_gallery_button = 
-"Grid Gallery";
+  I18n.translations.en.js.composer.tiles_add_images_prompt = "Add images";
+  I18n.translations.en.js.tiles_gallery_button = "Grid Gallery";
 });
-
 
 //------------------------------------------
 // initialize Tiles
 //------------------------------------------
 var tiles_selector = 'div[data-theme-tiles="1"]';
-
 api.decorateCooked($elem =>
-	$elem
-		.children(tiles_selector)
-		.not(".tiles-initialized")
-		.imagesLoaded(function() {
-			$(tiles_selector).masonry({
-				itemSelector: ".lightbox-wrapper",
-				transitionDuration: 0
-			});
-		})
-		.one("layoutComplete", function() {
-			$(tiles_selector).addClass("tiles-initialized")
-		}),
-		$(tiles_selector).masonry('layout')
+  $elem
+    .children(tiles_selector)
+    .not(".tiles-initialized")
+    .imagesLoaded(function() {
+      $(tiles_selector).masonry({
+        itemSelector: ".lightbox-wrapper",
+        transitionDuration: 0
+      });
+    })
+    .masonry("layout")
+    .one("layoutComplete", function() {
+      $(tiles_selector).addClass("tiles-initialized");
+    })
 );
 //------------------------------------------
 // Add Tiles button to the composer toolbar
 //------------------------------------------
 api.onToolbarCreate(function(toolbar) {
-	toolbar.addButton({
-		trimLeading: true,
-		id: "TilesGallery",
-		group: "insertions",
-		icon: "th",
-		title: "tiles_gallery_button",
-		perform: function(e) {
-			return e.applySurround(
-				'<div data-theme-tiles="1">\n\n',
-				"\n\n</div>",
-				"tiles_add_images_prompt"
-			);
-		}
-	});
+  toolbar.addButton({
+    trimLeading: true,
+    id: "TilesGallery",
+    group: "insertions",
+    icon: "th",
+    title: "tiles_gallery_button",
+    perform: function(e) {
+      return e.applySurround(
+        '<div data-theme-tiles="1">\n\n',
+        "\n\n</div>",
+        "tiles_add_images_prompt"
+      );
+    }
+  });
 });
 </script>
