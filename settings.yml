@@ -1,0 +1,8 @@
+Tiles_button_text:
+  default: "Grid Gallery"
+  description:
+    en: Enter the text for the button title in the composer.
+Tiles_add_images_prompt:
+  default: "Add images"
+  description:
+    en: Enter the text that appears in the composer as placeholder after the user clicks the button.
