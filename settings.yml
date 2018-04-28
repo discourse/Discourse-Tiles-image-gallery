@@ -1,7 +1,7 @@
 Tiles_button_text:
   default: "Grid Gallery"
   description:
-    en: Enter the text for the button title in the composer.
+    en: Enter the text for the title of the button in the composer.
 Tiles_add_images_prompt:
   default: "Add images"
   description:
