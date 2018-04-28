@@ -5,4 +5,4 @@ Tiles_button_text:
 Tiles_add_images_prompt:
   default: "Add images"
   description:
-    en: Enter the text that appears in the composer as placeholder after the user clicks the button.
+    en: Enter the placeholder text that appears in the composer after the user clicks the button.
