@@ -18,22 +18,26 @@ $(document).ready(function() {
 // initialize Tiles
 //------------------------------------------
 var tiles_selector = 'div[data-theme-tiles="1"]';
+
+$.fn.dtiles = function() {
+  this.imagesLoaded().progress(function() {
+    $(tiles_selector)
+      .masonry({
+        itemSelector: ".lightbox-wrapper",
+        transitionDuration: 0
+      })
+      .masonry();
+  });
+  return this;
+};
+
 api.decorateCooked($elem =>
   $elem
     .children(tiles_selector)
-    .not(".tiles-initialized")
-    .imagesLoaded(function() {
-      $(tiles_selector)
-        .masonry({
-          itemSelector: ".lightbox-wrapper",
-          transitionDuration: 0
-        })
-        .masonry("layout");
-    })
-    .one("layoutComplete", function() {
-      $(tiles_selector).addClass("tiles-initialized");
-    })
+    .dtiles()
+    .addClass("tiles-initialized")
 );
+
 //------------------------------------------
 // Add Tiles button to the composer toolbar
 //------------------------------------------
