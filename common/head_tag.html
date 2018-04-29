@@ -23,12 +23,13 @@ api.decorateCooked($elem =>
     .children(tiles_selector)
     .not(".tiles-initialized")
     .imagesLoaded(function() {
-      $(tiles_selector).masonry({
-        itemSelector: ".lightbox-wrapper",
-        transitionDuration: 0
-      });
+      $(tiles_selector)
+        .masonry({
+          itemSelector: ".lightbox-wrapper",
+          transitionDuration: 0
+        })
+        .masonry("layout");
     })
-    .masonry("layout")
     .one("layoutComplete", function() {
       $(tiles_selector).addClass("tiles-initialized");
     })
