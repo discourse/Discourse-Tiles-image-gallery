@@ -6,3 +6,7 @@ Tiles_add_images_prompt:
   default: "Add images"
   description:
     en: Enter the placeholder text that appears in the composer after the user clicks the button.
+Tiles_button_icon:
+  default: "th"
+  description:
+    en: Choose an icon for the Tiles gallery button in the composer
