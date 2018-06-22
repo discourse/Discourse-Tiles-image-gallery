@@ -1,7 +1,4 @@
 <script 
-src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js">
-</script>
-<script 
 src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js">
 </script>
 
@@ -17,16 +14,17 @@ $(document).ready(function() {
 //------------------------------------------
 // initialize Tiles
 //------------------------------------------
-var tiles_selector = 'div[data-theme-tiles="1"]';
+var tiles_selector = '.cooked div[data-theme-tiles="1"]';
 
 $.fn.dtiles = function() {
-  this.imagesLoaded().progress(function() {
-    $(tiles_selector)
-      .masonry({
+  this.each(function() {
+    var update = function() {
+      $(this).masonry({
         itemSelector: ".lightbox-wrapper",
         transitionDuration: 0
-      })
-      .masonry();
+      });
+    };
+    this.addEventListener("load", update, true);
   });
   return this;
 };
@@ -46,7 +44,7 @@ api.onToolbarCreate(function(toolbar) {
     trimLeading: true,
     id: "TilesGallery",
     group: "insertions",
-    icon: "th",
+    icon: settings.Tiles_button_icon,
     title: "tiles_gallery_button",
     perform: function(e) {
       return e.applySurround(
