@@ -7,8 +7,9 @@ src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js">
 // Tiles I18n Translations
 //------------------------------------------
 $(document).ready(function() {
-  I18n.translations.en.js.composer.tiles_add_images_prompt = settings.Tiles_add_images_prompt;
-  I18n.translations.en.js.tiles_gallery_button = settings.Tiles_button_text;
+  let currentLocale = I18n.currentLocale();
+  I18n.translations[currentLocale].js.composer.tiles_add_images_prompt = settings.Tiles_add_images_prompt;
+  I18n.translations[currentLocale].js.tiles_gallery_button = settings.Tiles_button_text;
 });
 
 //------------------------------------------
