@@ -5,90 +5,84 @@
 // Author: David DeSandro               //
 // https://masonry.desandro.com         //
 //--------------------------------------//
-//            imagesLoaded              //
-//  ----------------------------------  //
-// Version: 4.1.4                       //
-// Author: David DeSandro               //
-// https://imagesloaded.desandro.com    //
-//--------------------------------------//
 
-   //--------------------------------//
-   //  Modifications for Discourse   //
-   //--------------------------------//
+//--------------------------------//
+//  Modifications for Discourse   //
+//--------------------------------//
 
-//------------------------------------------
 // Variables
 //------------------------------------------
 $tiles-min-width-for-three-columns: 750px !default;
 $tiles-meta-background: rgba(black, 0.8) !default;
 $tiles-padding: 3px !default;
 
-//------------------------------------------
 // Tiles Grid
 //------------------------------------------
 .tiles-initialized {
-	.lightbox-wrapper,
-	> img {
-		display: block;
-		width: 100%;
-		height: auto;
-		box-sizing: border-box;
-		padding: $tiles-padding;
+  .lightbox-wrapper,
+  > img {
+    display: block;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: $tiles-padding;
 
-		@media (max-width: $tiles-min-width-for-three-columns) {
-			width: 50%;
-		}
+    @media (max-width: $tiles-min-width-for-three-columns) {
+      width: 50%;
+    }
 
-		@media (min-width: $tiles-min-width-for-three-columns) {
-			width: 33.333%;
-		}
-	}
+    @media (min-width: $tiles-min-width-for-three-columns) {
+      width: 33.333%;
+    }
+  }
 
-	.lightbox {
-		display: block;
+  .lightbox {
+    display: block;
 
-		> img:not(.thumbnail) {
-			max-width: 100%;
-			max-height: unset;
-			height: auto;
-		}
-	}
+    > img:not(.thumbnail) {
+      max-width: 100%;
+      max-height: unset;
+      height: auto;
+    }
+  }
 
-	.meta {
-		overflow: hidden;
-		background: $tiles-meta-background;
-	}
+  .meta {
+    overflow: hidden;
+    background: $tiles-meta-background;
+  }
 
-	p:empty,
-	br,
-	> img {
-		display: none;
-	}
+  p:empty,
+  br,
+  > img {
+    display: none;
+  }
 }
 
-//------------------------------------------
 // Hide before init
 //------------------------------------------
 div[data-theme-tiles="1"]:not(.tiles-initialized) {
-	display: none;
+  display: none;
 }
 
 .d-editor-preview div[data-theme-tiles="1"],
 .tiles-initialized {
-	display: block;
+  display: block;
 }
 
-//------------------------------------------
 // Editor preview
 //------------------------------------------
 #reply-control div[data-theme-tiles="1"] > p {
-	border-left: 4px solid $tertiary;
-	padding-left: 2px;
-	margin-top: 2em;
+  border-left: 4px solid $tertiary;
+  padding-left: 2px;
+  margin-top: 2em;
 
-	> img:not(.thumbnail) {
-		width: auto;
-		max-height: 110px;
-		margin: 2px;
-	}
+  > img:not(.thumbnail) {
+    width: auto;
+    max-height: 110px;
+    margin: 2px;
+  }
+}
+
+.bio-composer .TilesGallery {
+  display: none;
 }
