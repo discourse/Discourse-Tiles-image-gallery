@@ -1,24 +1,33 @@
-//--------------------------------------//
-//                Masonry               //
-//  ----------------------------------  //
-// Version: 4.2.1                       //
-// Author: David DeSandro               //
-// https://masonry.desandro.com         //
-//--------------------------------------//
+@import "common/foundation/variables";
 
-//--------------------------------//
-//  Modifications for Discourse   //
-//--------------------------------//
-
-// Variables
-//------------------------------------------
-$tiles-min-width-for-three-columns: 750px !default;
-$tiles-meta-background: rgba(black, 0.8) !default;
 $tiles-padding: 3px !default;
 
 // Tiles Grid
 //------------------------------------------
 .tiles-initialized {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  .tiles-col {
+    min-width: calc(100% / 3);
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+  }
+
+  .tiles-col--3 {
+    display: none;
+  }
+
+  @media (min-width: 775px) {
+    .tiles-col--3 {
+      display: block;
+    }
+  }
+
   .lightbox-wrapper,
   > img {
     display: block;
@@ -26,29 +35,57 @@ $tiles-padding: 3px !default;
     height: auto;
     box-sizing: border-box;
     padding: $tiles-padding;
-
-    @media (max-width: $tiles-min-width-for-three-columns) {
-      width: 50%;
-    }
-
-    @media (min-width: $tiles-min-width-for-three-columns) {
-      width: 33.333%;
-    }
   }
 
   .lightbox {
     display: block;
+    position: relative;
+    background: $primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    &:before {
+      display: flex;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      font-family: fontAwesome;
+      content: "\f00e";
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      color: $primary-low;
+    }
+
+    &:hover:before {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.75);
+    }
+
+    .meta {
+      display: none;
+    }
     > img:not(.thumbnail) {
       max-width: 100%;
+      width: 100%;
       max-height: unset;
       height: auto;
+      transition: opacity 1s ease;
+      opacity: 0;
+      z-index: 0;
     }
-  }
 
-  .meta {
-    overflow: hidden;
-    background: $tiles-meta-background;
+    .spinner {
+      opacity: 0.5;
+    }
   }
 
   p:empty,
@@ -58,19 +95,6 @@ $tiles-padding: 3px !default;
   }
 }
 
-// Hide before init
-//------------------------------------------
-div[data-theme-tiles="1"]:not(.tiles-initialized) {
-  display: none;
-}
-
-.d-editor-preview div[data-theme-tiles="1"],
-.tiles-initialized {
-  display: block;
-}
-
-// Editor preview
-//------------------------------------------
 #reply-control div[data-theme-tiles="1"] > p {
   border-left: 4px solid $tertiary;
   padding-left: 2px;
@@ -85,4 +109,11 @@ div[data-theme-tiles="1"]:not(.tiles-initialized) {
 
 .bio-composer .TilesGallery {
   display: none;
+}
+
+.spinner-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
