@@ -20,7 +20,7 @@ license: MIT - https://github.com/alexanderdickson/waitForImages/blob/master/LIC
 
 <script type="text/discourse-plugin" version="0.8.18">
 let topicCategory,
-  categories = ["staff", "lounge"];
+  categories = settings.Auto_tiles_categories.split('|');
 
 api.modifyClass("component:discourse-topic", {
   didInsertElement: function() {
