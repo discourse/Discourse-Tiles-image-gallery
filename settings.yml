@@ -10,3 +10,8 @@ Tiles_button_icon:
   default: "th"
   description:
     en: Choose an icon for the Tiles gallery button in the composer
+Auto_tiles_categories:
+  default: ""
+  type: list
+  description:
+    en: Add category slugs for categories where you want galleries to be automatically created
