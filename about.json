@@ -1,6 +1,7 @@
 {
   "name": "Tiles - Gallery Component (auto-tiles branch)",
   "about_url": "https://meta.discourse.org/t/tiles-gallery-component/81950",
+  "branch": "auto-tiles",
   "component": true,
   "license_url": "https://github.com/hnb-ku/Discourse-Tiles-image-gallery/blob/master/LICENSE"
 }
