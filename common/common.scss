@@ -38,34 +38,31 @@ $tiles-padding: 3px !default;
   }
 
   .lightbox {
-    display: block;
     position: relative;
-    background: $primary;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    &:before {
-      display: flex;
-      opacity: 0;
+    .tiles-zoom {
       transition: opacity 0.5s ease-in-out;
-      background: rgba(0, 0, 0, 0.75);
-      z-index: 1;
+      opacity: 0;
       height: 100%;
       width: 100%;
       position: absolute;
-      top: 0;
-      left: 0;
-      content: "";
-      font-family: fontAwesome;
-      content: "\f00e";
+      z-index: 1;
+      flex: 1;
+      pointer-events: none;
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5em;
-      color: $primary-low;
+      svg {
+        color: $primary-low;
+        height: 1.5em;
+        width: 1.5em;
+      }
     }
 
-    &:hover:before {
+    &:hover .tiles-zoom {
       opacity: 1;
       background: rgba(0, 0, 0, 0.75);
     }
@@ -73,18 +70,16 @@ $tiles-padding: 3px !default;
     .meta {
       display: none;
     }
-    > img:not(.thumbnail) {
+    > img {
       max-width: 100%;
       width: 100%;
       max-height: unset;
       height: auto;
-      transition: opacity 1s ease;
-      opacity: 0;
+      transition: all 1s ease;
       z-index: 0;
-    }
-
-    .spinner {
-      opacity: 0.5;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
 
@@ -109,11 +104,4 @@ $tiles-padding: 3px !default;
 
 .bio-composer .TilesGallery {
   display: none;
-}
-
-.spinner-wrapper {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 }
