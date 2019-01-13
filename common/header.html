@@ -1,103 +1,76 @@
-<!-- 
-Colcade.js
-Author: David DeSandro
-Github: https://github.com/desandro/colcade
-license: MIT - https://desandro.mit-license.org/
--->
 <script>
+// Colcade.js
+// Author: David DeSandro
+// Github: https://github.com/desandro/colcade
+// license: MIT - https://desandro.mit-license.org/
 !function(t,e){"function"==typeof define&&define.amd?define(e):"object"==typeof module&&module.exports?module.exports=e():t.Colcade=e()}(window,function(){function t(t,e){if((t=s(t))&&t.colcadeGUID){var i=a[t.colcadeGUID];return i.option(e),i}this.element=t,this.options={},this.option(e),this.create()}function e(e){var i={};e.getAttribute("data-colcade").split(",").forEach(function(t){var e=t.split(":"),n=e[0].trim(),o=e[1].trim();i[n]=o}),new t(e,i)}function i(t,e){for(var i in e)t[i]=e[i];return t}function n(t){var e=[];if(Array.isArray(t))e=t;else if(t&&"number"==typeof t.length)for(var i=0;i<t.length;i++)e.push(t[i]);else e.push(t);return e}function o(t,e){return n((e=e||document).querySelectorAll(t))}function s(t){return"string"==typeof t&&(t=document.querySelector(t)),t}var u=t.prototype;u.option=function(t){this.options=i(this.options,t)};var r=0,a={};return u.create=function(){this.errorCheck();var t=this.guid=++r;this.element.colcadeGUID=t,a[t]=this,this.reload(),this._windowResizeHandler=this.onWindowResize.bind(this),this._loadHandler=this.onLoad.bind(this),window.addEventListener("resize",this._windowResizeHandler),this.element.addEventListener("load",this._loadHandler,!0)},u.errorCheck=function(){var t=[];if(this.element||t.push("Bad element: "+this.element),this.options.columns||t.push("columns option required: "+this.options.columns),this.options.items||t.push("items option required: "+this.options.items),t.length)throw new Error("[Colcade error] "+t.join(". "))},u.reload=function(){this.updateColumns(),this.updateItems(),this.layout()},u.updateColumns=function(){this.columns=o(this.options.columns,this.element)},u.updateItems=function(){this.items=o(this.options.items,this.element)},u.getActiveColumns=function(){return this.columns.filter(function(t){return"none"!=getComputedStyle(t).display})},u.layout=function(){this.activeColumns=this.getActiveColumns(),this._layout()},u._layout=function(){this.columnHeights=this.activeColumns.map(function(){return 0}),this.layoutItems(this.items)},u.layoutItems=function(t){t.forEach(this.layoutItem,this)},u.layoutItem=function(t){var e=Math.min.apply(Math,this.columnHeights),i=this.columnHeights.indexOf(e);this.activeColumns[i].appendChild(t),this.columnHeights[i]+=t.offsetHeight||1},u.append=function(t){var e=this.getQueryItems(t);this.items=this.items.concat(e),this.layoutItems(e)},u.prepend=function(t){var e=this.getQueryItems(t);this.items=e.concat(this.items),this._layout()},u.getQueryItems=function(t){t=n(t);var e=document.createDocumentFragment();return t.forEach(function(t){e.appendChild(t)}),o(this.options.items,e)},u.measureColumnHeight=function(t){var e=this.element.getBoundingClientRect();this.activeColumns.forEach(function(i,n){if(!t||i.contains(t)){var o=i.lastElementChild.getBoundingClientRect();this.columnHeights[n]=o.bottom-e.top}},this)},u.onWindowResize=function(){clearTimeout(this.resizeTimeout),this.resizeTimeout=setTimeout(function(){this.onDebouncedResize()}.bind(this),100)},u.onDebouncedResize=function(){var t=this.getActiveColumns(),e=t.length==this.activeColumns.length,i=!0;this.activeColumns.forEach(function(e,n){i=i&&e==t[n]}),e&&i||(this.activeColumns=t,this._layout())},u.onLoad=function(t){this.measureColumnHeight(t.target)},u.destroy=function(){this.items.forEach(function(t){this.element.appendChild(t)},this),window.removeEventListener("resize",this._windowResizeHandler),this.element.removeEventListener("load",this._loadHandler,!0),delete this.element.colcadeGUID,delete a[this.guid]},function(t){"complete"!=document.readyState?document.addEventListener("DOMContentLoaded",t):t()}(function(){o("[data-colcade]").forEach(e)}),t.data=function(t){var e=(t=s(t))&&t.colcadeGUID;return e&&a[e]},t.makeJQueryPlugin=function(e){function i(t,i,n){var o;return t.each(function(t,s){var u=e.data(s,"colcade");if(u){var r=u[i].apply(u,n);o=void 0===o?r:o}}),void 0!==o?o:t}function n(i,n){i.each(function(i,o){var s=e.data(o,"colcade");s?(s.option(n),s.layout()):(s=new t(o,n),e.data(o,"colcade",s))})}(e=e||window.jQuery)&&(e.fn.colcade=function(t){return"string"==typeof t?i(this,t,Array.prototype.slice.call(arguments,1)):(n(this,t),this)})},t.makeJQueryPlugin(),t});
 </script>
 
-<!-- 
-waitForImages.js
-Author: Alexander Dickson
-Github: https://github.com/alexanderdickson/waitForImages
-license: MIT - https://github.com/alexanderdickson/waitForImages/blob/master/LICENSE-MIT
--->
-<script>
-!function(a){"function"==typeof define&&define.amd?define(["jquery"],a):"object"==typeof exports?module.exports=a(require("jquery")):a(jQuery)}(function(a){var b="waitForImages",c=function(a){return a.srcset&&a.sizes}(new Image);a.waitForImages={hasImageProperties:["backgroundImage","listStyleImage","borderImage","borderCornerImage","cursor"],hasImageAttributes:["srcset"]},a.expr.pseudos["has-src"]=function(b){return a(b).is('img[src][src!=""]')},a.expr.pseudos.uncached=function(b){return!!a(b).is(":has-src")&&!b.complete},a.fn.waitForImages=function(){var d,e,f,g=0,h=0,i=a.Deferred(),j=this,k=[],l=a.waitForImages.hasImageProperties||[],m=a.waitForImages.hasImageAttributes||[],n=/url\(\s*(['"]?)(.*?)\1\s*\)/g;if(a.isPlainObject(arguments[0])?(f=arguments[0].waitForAll,e=arguments[0].each,d=arguments[0].finished):1===arguments.length&&"boolean"===a.type(arguments[0])?f=arguments[0]:(d=arguments[0],e=arguments[1],f=arguments[2]),d=d||a.noop,e=e||a.noop,f=!!f,!a.isFunction(d)||!a.isFunction(e))throw new TypeError("An invalid callback was supplied.");return this.each(function(){var b=a(this);f?b.find("*").addBack().each(function(){var b=a(this);b.is("img:has-src")&&!b.is("[srcset]")&&k.push({src:b.attr("src"),element:b[0]}),a.each(l,function(a,c){var d,e=b.css(c);if(!e)return!0;for(;d=n.exec(e);)k.push({src:d[2],element:b[0]})}),a.each(m,function(a,c){var d=b.attr(c);return!d||void k.push({src:b.attr("src"),srcset:b.attr("srcset"),element:b[0]})})}):b.find("img:has-src").each(function(){k.push({src:this.src,element:this})})}),g=k.length,h=0,0===g&&(d.call(j),i.resolveWith(j)),a.each(k,function(f,k){var l=new Image,m="load."+b+" error."+b;a(l).one(m,function b(c){var f=[h,g,"load"==c.type];if(h++,e.apply(k.element,f),i.notifyWith(k.element,f),a(this).off(m,b),h==g)return d.call(j[0]),i.resolveWith(j[0]),!1}),c&&k.srcset&&(l.srcset=k.srcset,l.sizes=k.sizes),l.src=k.src}),i.promise()}});
-</script>
-
 <script type="text/discourse-plugin" version="0.8.18">
-// Tiles I18n Translations
-let currentLocale = I18n.currentLocale();
+const iconHTML = require("discourse-common/lib/icon-library").iconHTML,
+  currentLocale = I18n.currentLocale(),
+  tiles_selector = '.cooked div[data-theme-tiles="1"]',
+  mobileView = $("html.mobile-view").length,
+  padding = 6; // padding between tiles
+
+let numberOfTiles = 3, // show three columns on dektop
+  cookedWidth = 690; // dekstop post width
+
+if (mobileView) {
+  numberOfTiles = 2; // show two columns on mobile
+  cookedWidth = $(window).width() - 20; // mobile post width (device width - #main-outlet padding)
+}
+
+const extraSpace = padding * numberOfTiles,
+  cleanWidth = cookedWidth - extraSpace,
+  tileWidth = cleanWidth / numberOfTiles;
+
 I18n.translations[currentLocale].js.composer.tiles_add_images_prompt =
   settings.Tiles_add_images_prompt;
 I18n.translations[currentLocale].js.tiles_gallery_button =
   settings.Tiles_button_text;
 
-// initialize Tiles
-let tiles_selector = '.cooked div[data-theme-tiles="1"]',
-  mobileView = $("html.mobile-view").length,
-  img = "",
-  cookedWidth = 690,
-  tileWidth = "",
-  padding = 6,
-  numberOfTiles = 3;
-
-if (mobileView) {
-  numberOfTiles = 2;
-  cookedWidth =
-    document.documentElement.clientWidth - $("main-outlet").css("padding");
-}
-
-let extraSpace = padding * numberOfTiles,
-  cleanWidth = cookedWidth - extraSpace;
-
-tileWidth = cleanWidth / numberOfTiles;
-
 $.fn.dtilesprep = function() {
-  if (this.length == 0) {
-    return this;
-  } else {
-    this.each(function() {
-      lightbox = $(this).find("a.lightbox");
+  if (this.length == 0) return this;
 
-      if (lightbox.length == 0) {
-        return this;
-      } else {
-        $.each(lightbox, function() {
-          $(this).prepend(
-            '<div class="spinner-wrapper"><div class="small spinner"></div></div>'
-          );
-          img = $(this).children("img");
-          height = img.attr("height");
-          width = img.attr("width");
-          adjustBy = width / tileWidth;
-          newHeight = height / adjustBy;
+  this.each(function() {
+    lightbox = $(this).find("a.lightbox");
 
-          $(this).css("height", newHeight);
+    if (lightbox.length == 0) return this;
 
-          $(this).waitForImages(function() {
-            $(this)
-              .children("img")
-              .css("opacity", 1);
-            $(this).css("min-height", "unset");
-            $(this)
-              .children(".spinner-wrapper")
-              .hide();
-          });
-        });
-      }
+    $.each(lightbox, function() {
+      img = $(this).children("img");
+      height = img.attr("height");
+      width = img.attr("width");
+      adjustBy = width / tileWidth;
+      newHeight = height / adjustBy;
+
+      $(this)
+        .css("height", newHeight)
+        .prepend(`<div class="tiles-zoom">${iconHTML("search")}</div>`);
     });
-  }
+  });
+
   return this;
 };
 
 $.fn.dtiles = function() {
-  if (this.length) {
-    this.each(function() {
-      $(this)
-        .prepend(
-          '<div class="tiles-col tiles-col--1"></div><div class="tiles-col tiles-col--2"></div><div class="tiles-col tiles-col--3"></div>'
-        )
-        .colcade({
-          columns: ".tiles-col",
-          items: ".lightbox-wrapper"
-        })
-        .addClass("tiles-initialized");
-    });
-  }
+  if (!this.length) return this;
+
+  this.each(function() {
+    $(this)
+      .prepend(
+        `<div class="tiles-col tiles-col--1"></div>
+           <div class="tiles-col tiles-col--2"></div>
+           <div class="tiles-col tiles-col--3"></div>`
+      )
+      .colcade({
+        columns: ".tiles-col",
+        items: ".lightbox-wrapper"
+      })
+      .addClass("tiles-initialized");
+  });
+
   return this;
 };
 
@@ -109,7 +82,6 @@ api.decorateCooked($elem =>
     .dtiles()
 );
 
-// Add Tiles button to the composer toolbar
 api.onToolbarCreate(function(toolbar) {
   toolbar.addButton({
     trimLeading: true,
