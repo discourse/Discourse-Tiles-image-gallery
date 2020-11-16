@@ -78,7 +78,7 @@ $.fn.dtiles = function() {
       .addClass("tiles-initialized");
   });
 
-  return this;
+  return <div>{this}</div>;
 };
 
 api.decorateCooked($elem =>
