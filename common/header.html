@@ -78,7 +78,44 @@ $.fn.dtiles = function() {
       .addClass("tiles-initialized");
   });
 
-  return <div>{this}</div>;
+  
+  const smallImages = $(this[0]).find("img").filter((ind,image)=>$(image).parent().attr("class") !=="lightbox")
+    
+    const tc1 = $(this[0]).find(".tiles-col--1")
+    const tc2 = $(this[0]).find(".tiles-col--2")
+    const tc3 = $(this[0]).find(".tiles-col--3")
+    
+    const tcArr = [{item:tc1, leng:tc1.length},
+                   {item:tc2, leng: tc2.length},
+                   {item:tc3, leng: tc3.length}
+                   ];
+    const tilesWithMinContent = () => {
+        // if(tcArr[0].leng===tcArr[1].leng && tcArr[1].leng===tcArr[2].leng) return tcArr[0]
+        const smallest = tcArr.reduce( (previous,current)=>( previous.leng > current.leng ? current : previous ) )
+        
+        return smallest;
+    }
+    
+    
+    $(smallImages).each( (index,image) => {
+       const imageContainer = $('<div style="padding:3px;"></div>')
+       $(image).css("width","100%");
+       $(image).css("max-width","690px");
+       $(image).css("height","auto");
+       $(image).css("max-height","500px");
+       $(imageContainer).append( image )
+       tilesWithMinContent().item.append(imageContainer)
+       tilesWithMinContent().leng++
+    } )
+    
+    $(this[0]).children().each((index,element)=>{
+        const isTilesCol = ($(element).attr('class') || "").includes('tiles-col')
+        if(!isTilesCol){
+            $(element).remove()
+        }
+    })
+
+  return this;
 };
 
 api.decorateCooked($elem =>
