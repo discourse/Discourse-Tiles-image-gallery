@@ -41,16 +41,16 @@ $.fn.dtilesprep = function() {
   if (this.length == 0) return this;
 
   this.each(function() {
-    lightbox = $(this).find("a.lightbox");
+    const lightbox = $(this).find("a.lightbox");
 
     if (lightbox.length == 0) return this;
 
     $.each(lightbox, function() {
-      img = $(this).children("img");
-      height = img.attr("height");
-      width = img.attr("width");
-      adjustBy = width / tileWidth;
-      newHeight = height / adjustBy;
+      const img = $(this).children("img");
+      const height = img.attr("height");
+      const width = img.attr("width");
+      const adjustBy = width / tileWidth;
+      const newHeight = height / adjustBy;
 
       $(this)
         .css("height", newHeight)
