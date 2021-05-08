@@ -100,7 +100,8 @@ api.onToolbarCreate(function(toolbar) {
       return e.applySurround(
         '<div data-theme-tiles="1">\n\n',
         "\n\n</div>",
-        "tiles_add_images_prompt"
+        "tiles_add_images_prompt",
+        { multiline: false }
       );
     }
   });
