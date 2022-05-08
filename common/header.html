@@ -82,12 +82,15 @@
     return this;
   };
 
-  api.decorateCooked($elem =>
-    $elem
-      .children(tiles_selector)
-      .not(".tiles-initialized")
-      .dtilesprep()
-      .dtiles()
+  api.decorateCooked(
+    ($elem) => {
+      return $elem
+        .children(tiles_selector)
+        .not(".tiles-initialized")
+        .dtilesprep()
+        .dtiles()
+    },
+    { id: "discourse-tiles-image-gallery" }
   );
 
   api.onToolbarCreate(function(toolbar) {
