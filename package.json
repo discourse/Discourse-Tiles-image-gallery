@@ -1,0 +1,10 @@
+{
+  "name": "Discourse-Tiles-image-gallery",
+  "version": "1.0.0",
+  "repository": "https://github.com/discourse/Discourse-Tiles-image-gallery",
+  "author": "Discourse",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "eslint-config-discourse": "^3.1.0"
+  }
+}
