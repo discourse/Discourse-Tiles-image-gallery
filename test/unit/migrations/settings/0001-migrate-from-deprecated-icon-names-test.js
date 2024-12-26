@@ -20,5 +20,21 @@ module(
       );
       assert.deepEqual(Array.from(result), Array.from(expectedResult));
     });
+
+    test("migrate empty settings", function (assert) {
+      const settings = new Map(Object.entries({}));
+      const result = migrate(settings);
+      assert.deepEqual(Array.from(result), Array.from(settings));
+    });
+
+    test("migrate same settings", function (assert) {
+      const settings = new Map(
+        Object.entries({
+          Tiles_button_icon: "table-cells",
+        })
+      );
+      const result = migrate(settings);
+      assert.deepEqual(Array.from(result), Array.from(settings));
+    });
   }
 );

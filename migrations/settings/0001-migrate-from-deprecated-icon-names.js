@@ -2,13 +2,13 @@ export default function migrate(settings) {
   const settingName = "Tiles_button_icon";
   const oldSetting = settings.get(settingName);
   if (!oldSetting) {
-    return;
+    return settings;
   }
 
   const newSetting = convertIconName(oldSetting);
 
   if (oldSetting === newSetting) {
-    return;
+    return settings;
   }
   settings.set(settingName, newSetting);
 
