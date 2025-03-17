@@ -2,19 +2,11 @@
 
 $tiles-padding: 3px !default;
 
-// Tiles Grid
-//------------------------------------------
 .tiles-initialized {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 
   .tiles-col {
     min-width: calc(100% / 3);
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
     flex-grow: 1;
   }
 
@@ -55,6 +47,7 @@ $tiles-padding: 3px !default;
       display: flex;
       align-items: center;
       justify-content: center;
+
       svg {
         color: $primary-low;
         height: 1.5em;
@@ -70,6 +63,7 @@ $tiles-padding: 3px !default;
     .meta {
       display: none;
     }
+
     > img {
       max-width: 100%;
       width: 100%;
