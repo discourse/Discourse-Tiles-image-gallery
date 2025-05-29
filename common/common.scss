@@ -14,7 +14,7 @@ $tiles-padding: 3px !default;
     display: none;
   }
 
-  @media (min-width: 775px) {
+  @media (width >= 775px) {
     .tiles-col--3 {
       display: block;
     }
@@ -57,7 +57,7 @@ $tiles-padding: 3px !default;
 
     &:hover .tiles-zoom {
       opacity: 1;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgb(0, 0, 0, 0.75);
     }
 
     .meta {
