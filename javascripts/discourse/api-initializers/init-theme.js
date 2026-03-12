@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-jquery */
 import $ from "jquery";
 import { apiInitializer } from "discourse/lib/api";
 import I18n from "discourse-i18n";
